@@ -14,7 +14,7 @@ inputs:
     description: 'Source Version Override'
     required: false
   source-location-override:
-    description: 'Source location Override'
+    description: 'Source Location Override'
     required: false
   env-vars-for-codebuild:
     description: 'Comma separated list of environment variables to send to CodeBuild'

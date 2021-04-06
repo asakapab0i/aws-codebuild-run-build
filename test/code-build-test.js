@@ -203,8 +203,6 @@ describe("inputs2Parameters", () => {
     const test = inputs2Parameters({
       projectName,
       sourceVersion: sha,
-      owner: "owner",
-      repo: "repo",
       envPassthrough: ["one", "two", "three", "four"],
     });
 
