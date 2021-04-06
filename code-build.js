@@ -144,7 +144,7 @@ function githubInputs() {
   return {
     projectName,
     buildspecOverride,
-    sourceVersionOverride,
+    sourceVersion: sourceVersionOverride,
     sourceLocationOverride,
     envPassthrough,
   };
@@ -154,7 +154,7 @@ function inputs2Parameters(inputs) {
   const {
     projectName,
     buildspecOverride,
-    sourceVersionOverride,
+    sourceVersion,
     sourceLocationOverride,
     envPassthrough = [],
   } = inputs;
@@ -173,7 +173,7 @@ function inputs2Parameters(inputs) {
     projectName,
     buildspecOverride,
     sourceTypeOverride,
-    sourceVersionOverride,
+    sourceVersion,
     sourceLocationOverride,
     environmentVariablesOverride,
   };
