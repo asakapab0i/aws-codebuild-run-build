@@ -58,9 +58,7 @@ describe("githubInputs", () => {
     process.env[`GITHUB_EVENT_NAME`] = "not_pull_request";
     const test = githubInputs();
     expect(test).to.haveOwnProperty("projectName").and.to.equal(projectName);
-    expect(test).to.haveOwnProperty("sourceVersion").and.to.equal(sha);
-    expect(test).to.haveOwnProperty("owner").and.to.equal(`owner`);
-    expect(test).to.haveOwnProperty("repo").and.to.equal(`repo`);
+    expect(test).to.haveOwnProperty("sourceVersionOverride").and.to.equal(sha);
     expect(test)
       .to.haveOwnProperty("buildspecOverride")
       .and.to.equal(undefined);
@@ -106,10 +104,8 @@ describe("githubInputs", () => {
     const test = githubInputs();
     expect(test).to.haveOwnProperty("projectName").and.to.equal(projectName);
     expect(test)
-      .to.haveOwnProperty("sourceVersion")
+      .to.haveOwnProperty("sourceVersionOverride")
       .and.to.equal(pullRequestSha);
-    expect(test).to.haveOwnProperty("owner").and.to.equal(`owner`);
-    expect(test).to.haveOwnProperty("repo").and.to.equal(`repo`);
     expect(test)
       .to.haveOwnProperty("buildspecOverride")
       .and.to.equal(undefined);
@@ -151,12 +147,11 @@ describe("inputs2Parameters", () => {
     process.env[`GITHUB_SHA`] = sha;
     const test = inputs2Parameters({
       projectName,
-      sourceVersion: sha,
-      owner: "owner",
-      repo: "repo",
+      sourceVersionOverride: sha,
+      sourceLocationOverride: "https://github.com/owner/repo.git",
     });
     expect(test).to.haveOwnProperty("projectName").and.to.equal(projectName);
-    expect(test).to.haveOwnProperty("sourceVersion").and.to.equal(sha);
+    expect(test).to.haveOwnProperty("sourceVersionOverride").and.to.equal(sha);
     expect(test)
       .to.haveOwnProperty("sourceTypeOverride")
       .and.to.equal("GITHUB");

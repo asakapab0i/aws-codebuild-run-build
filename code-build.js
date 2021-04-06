@@ -127,6 +127,14 @@ function githubInputs() {
   const buildspecOverride =
     core.getInput("buildspec-override", { required: false }) || undefined;
 
+  const sourceVersionOverride =
+    core.getInput("source-version-override", { required: false }) ||
+    sourceVersion;
+
+  const sourceLocationOverride =
+    core.getInput("source-location-override", { required: false }) ||
+    `https://github.com/${owner}/${repo}.git`;
+
   const envPassthrough = core
     .getInput("env-vars-for-codebuild", { required: false })
     .split(",")
@@ -135,10 +143,9 @@ function githubInputs() {
 
   return {
     projectName,
-    owner,
-    repo,
-    sourceVersion,
     buildspecOverride,
+    sourceVersionOverride,
+    sourceLocationOverride,
     envPassthrough,
   };
 }
@@ -146,15 +153,13 @@ function githubInputs() {
 function inputs2Parameters(inputs) {
   const {
     projectName,
-    owner,
-    repo,
-    sourceVersion,
     buildspecOverride,
+    sourceVersionOverride,
+    sourceLocationOverride,
     envPassthrough = [],
   } = inputs;
 
   const sourceTypeOverride = "GITHUB";
-  const sourceLocationOverride = `https://github.com/${owner}/${repo}.git`;
 
   const environmentVariablesOverride = Object.entries(process.env)
     .filter(
@@ -166,10 +171,10 @@ function inputs2Parameters(inputs) {
   // This way the GitHub events can manage the builds.
   return {
     projectName,
-    sourceVersion,
-    sourceTypeOverride,
-    sourceLocationOverride,
     buildspecOverride,
+    sourceTypeOverride,
+    sourceVersionOverride,
+    sourceLocationOverride,
     environmentVariablesOverride,
   };
 }
