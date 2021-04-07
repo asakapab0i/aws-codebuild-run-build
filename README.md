@@ -162,7 +162,7 @@ this will overwrite them.
   with:
     project-name: CodeBuildProjectName
     buildspec-override: path/to/buildspec.yaml
-    source-version-override: 213aytcae123
+      source-version-override: master | branch | commit
     source-location-override: https://github.com/github/github
     env-vars-for-codebuild: |
       custom,
